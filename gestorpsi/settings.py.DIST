@@ -12,6 +12,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 
+# fix for the used kombu version
+# see this: http://stackoverflow.com/questions/34198538/cannot-import-name-uuid-generate-random-in-heroku-django
+import uuid
+uuid._uuid_generate_random = None
 
 import os
 PROJECT_ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
