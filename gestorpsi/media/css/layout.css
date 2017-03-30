@@ -1514,7 +1514,19 @@ body .main_area.register {
         text-align: center;
 }
 
-body .main_area.register form fieldset,
+body .main_area.register form fieldset{
+        background:#ECECEC;
+        padding: 10px;
+        -moz-border-radius-topleft: 8px;
+        -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomleft: 8px;
+        -moz-border-radius-bottomright: 8px;
+        -webkit-border-radius-topleft: 8px;
+        -webkit-border-radius-topright: 8px;
+        -webkit-border-radius-bottomleft: 8px;
+        -webkit-border-radius-bottomright: 8px;
+        border: 1px solid #838383;
+}
 body .main_area.login form fieldset {
         background:#ECECEC;
         padding: 10px;
