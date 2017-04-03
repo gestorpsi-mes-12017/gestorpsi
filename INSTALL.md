@@ -51,6 +51,7 @@ Make sure you're inside GestorPsi's virtualenv
 
 ```bash
 $ workon gestorpsi # or the name of the env you have set
+$ pip install git+git://github.com/digi604/django-smart-selects.git@eea07eeb759f75c77497b2425b84574cf6c6ac4d
 $ pip install -r requirements.txt
 ```
 
