@@ -34,6 +34,7 @@ from django.db.models.base import ModelBase
 
 from gestorpsi.settings import SITE_DISABLED, ADMIN_URL, ADMINS_REGISTRATION, URL_APP, URL_HOME, SIGNATURE, URL_DEMO
 
+from django.shortcuts import render, redirect
 from gestorpsi.organization.models import Organization, ProfessionalResponsible
 from gestorpsi.gcm.models.invoice import Invoice
 from gestorpsi.util.views import get_object_or_None
@@ -56,7 +57,7 @@ def user_authentication(request):
     form = AuthenticationForm(data=request.POST)
     username = request.POST.get('username').strip().lower()
     password = request.POST.get('password')
-    
+
     if (unblocked_user(username)):
         user = authenticate(username=username, password=password)
         # user does not exist
@@ -70,7 +71,6 @@ def user_authentication(request):
 
         user_registration_not_confirmed(user, form)
         return login_active_user(user, form, request)
-
     else:
         return return_invalid_username(form)
 
@@ -226,12 +226,12 @@ def register(request, success_url=None,
                 bcc_list = ADMINS_REGISTRATION
 
                 send_email_message_new_signature(bcc_list, org)
-                
+
                 request.session['user_aux_id'] = user.id
 
                 message_for_client(organzation_invoice, request, bcc_list)
 
-                return HttpResponseRedirect(success_url or reverse('registration-complete'))
+                return redirect(reverse('registration-complete'))
 
     else:
         form = form_class()
