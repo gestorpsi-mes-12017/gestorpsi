@@ -3864,7 +3864,7 @@ msgstr ""
 #: templates/client/client_print.html:259
 #: templates/client/client_print.html:317
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: templates/client/client_home.html:144
 #: templates/client/client_print.html:120
@@ -4040,8 +4040,9 @@ msgstr ""
 
 #: templates/client/client_print.html:286
 #: templates/referral/referral_details.html:85
+#: templates/organization/organization_signature_suspension.html:53
 msgid "Reason"
-msgstr ""
+msgstr "Razão"
 
 #: templates/client/client_print.html:288
 #: templates/client/client_referral_form.html:162
@@ -5585,13 +5586,49 @@ msgstr "Assinatura atual"
 msgid "Paid in"
 msgstr "Pago em"
 
+#: templates/organization/organization_signature_suspension.html:26
+msgid "Suspend"
+msgstr "Suspender"
+
 #: templates/organization/organization_signature_suspension.html:41
-msgid "Suspender assinatura"
-msgstr ""
+msgid "Suspend signature"
+msgstr "Suspender assinatura"
+
+#: templates/organization/organization_signature_suspension.html:41
+msgid "Suspending the subscription you will only be able to consult the data in the system, you will not be able to enter new information. You can re-use GestorPSI at any time, just"
+msgstr "Suspendendo a assinatura você só poderá consultar os dados no sistema, você não será capaz de inserir novas informações. Você pode reutilizar o GestorPSI a qualquer momento, apenas"
 
 #: templates/organization/organization_signature_suspension.html:46
-msgid "Deseja suspender a assinatura?"
-msgstr ""
+msgid "Do you want to unsubscribe?"
+msgstr "Deseja suspender a assinatura?"
+
+#: templates/organization/organization_signature_suspension.html:56
+msgid "I did not have time to test the system during the trial period."
+msgstr "Eu não tive tempo para testar o sistema durante o período experimental"
+
+#: templates/organization/organization_signature_suspension.html:57
+msgid "The system does not have features that meets my needs."
+msgstr "O sistema não tem recursos que atendam às minhas necessidades"
+
+#: templates/organization/organization_signature_suspension.html:58
+msgid "There was resistance to the use of the system in my establishment."
+msgstr "Houve resistência ao uso do sistema em meu estabelecimento"
+
+#: templates/organization/organization_signature_suspension.html:59
+msgid "The amounts charged are beyond my means"
+msgstr "Os valores cobrados estão além dos meus meios de pagar"
+
+#: templates/organization/organization_signature_suspension.html:60
+msgid "I had difficulty understanding the operation of the system."
+msgstr "Eu tive dificuldade em entender o funcionamento do sistema."
+
+#: templates/organization/organization_signature_suspension.html:61
+msgid "Other reasons"
+msgstr "Outros."
+
+#: templates/organization/organization_signature_suspension.html:66
+msgid "Another reason"
+msgstr "Outra razão"
 
 #: templates/organization/second_copy.html:6
 msgid "Second copy of billet"
