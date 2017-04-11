@@ -797,7 +797,7 @@ msgstr ""
 #: client/models.py:85 demographic/forms.py:28 demographic/forms.py:36
 #: ehr/forms.py:39 ehr/forms.py:56 ehr/forms.py:65 referral/models.py:453
 #: templates/admission/admission_form.html:148
-#: templates/careprofessional/careprofessional_form.html:148
+#: templates/careprofessional/careprofessional_form.html:139
 #: templates/careprofessional/student_form.html:117
 #: templates/careprofessional/student_form.html:118
 #: templates/client/client_form_company.html:71
@@ -827,7 +827,7 @@ msgstr ""
 #: client/views.py:135 client/views.py:173
 msgid ""
 "There's no Service created yet. Please, create one before access Client, "
-msgstr ""
+msgstr "Ainda não existe nenhum Serviço criado. Por favor, crie um antes de acessar o Cliente"
 
 #: client/views.py:156
 msgid "This client is not enabled."
@@ -1976,7 +1976,7 @@ msgstr ""
 
 #: referral/models.py:101 referral/models.py:540
 msgid "comments"
-msgstr ""
+msgstr "comentários"
 
 #: referral/models.py:102
 msgid "Data In"
@@ -6192,14 +6192,12 @@ msgid ""
 msgstr ""
 
 #: templates/report/report_index.html:53
-msgid ""
-"Displaying reports. Use the controls below to customize this page and save "
-"it on the tab My Reports"
-msgstr ""
+msgid "Displaying reports. Use the controls below to customize this page and save it on the tab My Reports"
+msgstr "Exibindo relatórios. Use os controles abaixo para personalizar esta página e salvá-la na guia Meus relatórios"
 
 #: templates/report/report_index.html:56
 msgid "Reports for"
-msgstr ""
+msgstr "Relatório para"
 
 #: templates/report/report_index.html:60
 msgid "Filtering by"
@@ -6400,9 +6398,8 @@ msgstr ""
 
 #: templates/schedule/schedule_referral_alert.html:26
 msgid ""
-"There is no client referral created yet. Please create one before start "
-"Schedule"
-msgstr ""
+"There is no client referral created yet. Please create one before start Schedule"
+msgstr "Não há referência de cliente criada ainda. Crie um antes do horário inicial"
 
 #: templates/schedule/schedule_settings.html:30
 msgid "Settings"
