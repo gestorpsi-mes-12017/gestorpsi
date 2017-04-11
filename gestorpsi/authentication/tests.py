@@ -18,6 +18,7 @@ from django.db import models
 from gestorpsi.person.models import Person
 from gestorpsi.organization.models import Organization
 from django.contrib.auth.models import User, UserManager, Group
+from django.contrib.sessions.models import Session
 from django.test import TestCase
 from .models import Profile, Role
 
@@ -85,15 +86,24 @@ class SigninTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.client = Client()
-
-        user = User.objects.create_user(username=user_stub["name"], email="mytest@gmail.com", password="botafogo.com")
-        user.profile = Profile()
-        user.profile.save()
-        user.save()
+        setup_required_data()
 
     def test_login_should_work(self):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
+
+    def test_login_should_signin_registered_users(self):
+        self.client.post(reverse('registration-register'), user_stub)
+        user = User.objects.get(username=user_stub["username"])
+        self.client.logout()
+        self.assertEqual(self.client.session, {})
+        response = self.client.post(reverse('login'), {
+            "username": user_stub["username"],
+            "password": user_stub["password1"],
+            "next": "/"
+        })
+        self.assertIsNot(self.client.session, {})
+        self.assertEqual(self.client.session['_auth_user_id'], user.id)
 
 class ProfileTest(TestCase):
     def setUp(self):
