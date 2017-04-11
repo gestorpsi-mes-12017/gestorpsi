@@ -1527,7 +1527,7 @@ msgstr ""
 #: templates/organization/organization_signature.html:50
 #: templates/tags/invoice.html:57
 msgid "Plan"
-msgstr ""
+msgstr "Plano"
 
 #: gcm/models/invoice.py:69
 msgid "Que banco recebeu?"
@@ -5531,26 +5531,59 @@ msgstr ""
 
 #: templates/organization/organization_signature.html:33
 #: templates/organization/organization_signature_suspension.html:33
-msgid "Assinatura da organiza&ccedil;&atilde;o"
-msgstr ""
+msgid "Organization signature"
+msgstr "Assinatura da organização"
 
 #: templates/organization/organization_signature.html:44
 msgid "Inscription date"
-msgstr ""
+msgstr "Data da inscrição"
 
 #: templates/organization/organization_signature.html:66
 msgid ""
-"The new plan will be effectively applied only when the current signature is "
-"over."
-msgstr ""
+"The new plan will be effectively applied only when the current signature is over."
+msgstr "O novo plano será efetivamente aplicado apenas quando a assinatura atual for concluída."
 
 #: templates/organization/organization_signature.html:69
-msgid "Forma de pagamento"
-msgstr ""
+msgid "Payment options"
+msgstr "Forma de Pagamento"
+
+#: templates/organization/organization_signature.html:90
+msgid "To change your form of payment or question"
+msgstr "Para trocar sua forma de pagamento ou alguma pergunta"
+
+#: templates/organization/organization_signature.html:90
+msgid "contact us"
+msgstr "entre em contato"
 
 #: templates/organization/organization_signature.html:120
-msgid "Hist&oacute;rico das faturas e pagamentos"
-msgstr ""
+msgid "History of invoices and payments"
+msgstr "Histórico de faturas e pagamentos"
+
+#: templates/organization/organization_signature.html:128
+#: templates/organization/organization_signature.html:189
+#: templates/organization/organization_signature.html:251
+msgid "plan"
+msgstr "plano"
+
+#: templates/organization/organization_signature.html:130
+#: templates/organization/organization_signature.html:191
+#: templates/organization/organization_signature.html:253
+msgid "maturity"
+msgstr "maturidade"
+
+#: templates/organization/organization_signature.html:131
+#: templates/organization/organization_signature.html:192
+#: templates/organization/organization_signature.html:254
+msgid "action"
+msgstr "ação"
+
+#: templates/organization/organization_signature.html:186
+msgid "Current signature"
+msgstr "Assinatura atual"
+
+#: templates/organization/organization_signature.html:235
+msgid "Paid in"
+msgstr "Pago em"
 
 #: templates/organization/organization_signature_suspension.html:41
 msgid "Suspender assinatura"
