@@ -18,12 +18,94 @@ from django.db import models
 from gestorpsi.person.models import Person
 from gestorpsi.organization.models import Organization
 from django.contrib.auth.models import User, UserManager, Group
+from django.contrib.sessions.models import Session
 from django.test import TestCase
 from .models import Profile, Role
 
+from django.test import TestCase, Client, RequestFactory
+from django.core.urlresolvers import reverse
+from gestorpsi.util.test_utils import setup_required_data
+
+user_stub = {
+    "address": u'niceaddress',
+    "address_number": u'244',
+    "city": u'1',
+    "cpf": u'741.095.117-63',
+    "email": u'user15555@gmail.com',
+    "name": u'user15555',
+    "organization": u'niceorg',
+    "password1": u'nicepass123',
+    "password2": u'nicepass123',
+    "phone": u'(55) 5432-4321',
+    "plan": u'1',
+    "shortname": u'NICE',
+    "state": u'1',
+    "username": u'user15',
+    "zipcode": u'12312-123',
+}
+
+bad_user_stub = {
+    "address": u'niceaddress',
+    "address_number": u'244',
+    "city": u'1',
+    "cpf": u'741.095.117-63',
+    "email": u'user15555@gmail.com',
+    "name": u'user15555',
+    "organization": u'niceorg',
+    "password1": u'nicepass123',
+    "password2": u'nicepass1', # different pass
+    "phone": u'(55) 5432-4321',
+    "plan": u'1',
+    "shortname": u'NICE',
+    "state": u'1',
+    "username": u'user15',
+    "zipcode": u'12312-123',
+}
+
+class SignupTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.client = Client()
+        setup_required_data()
+
+    def test_signup_should_work(self):
+        response = self.client.get(reverse('registration-register'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_signup_shouldnt_work_for_wrong_values(self):
+        old_user_count = User.objects.count()
+        response = self.client.post(reverse('registration-register'), bad_user_stub)
+        self.assertEqual(User.objects.count(), old_user_count)
+
+    def test_signup_with_correct_data_should_increase_total_number_of_users(self):
+        old_user_count = User.objects.count()
+        response = self.client.post(reverse('registration-register'), user_stub)
+        self.assertEqual(User.objects.count(), old_user_count+1)
+
+class SigninTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.client = Client()
+        setup_required_data()
+
+    def test_login_should_work(self):
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_should_signin_registered_users(self):
+        self.client.post(reverse('registration-register'), user_stub)
+        user = User.objects.get(username=user_stub["username"])
+        self.client.logout()
+        self.assertEqual(self.client.session, {})
+        response = self.client.post(reverse('login'), {
+            "username": user_stub["username"],
+            "password": user_stub["password1"],
+            "next": "/"
+        })
+        self.assertIsNot(self.client.session, {})
+        self.assertEqual(self.client.session['_auth_user_id'], user.id)
 
 class ProfileTest(TestCase):
-
     def setUp(self):
         tobias = User()
         joaquim = Person()
