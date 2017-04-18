@@ -100,29 +100,26 @@ GNU General Public License for more details.
 			</label>
         </fieldset>
 
-<fieldset class="comment_form">
-        <legend>{% trans "Comments" %}</legend>
-        <label>
-                <textarea name="comments" class="extrabig">{{ object.comments }}</textarea>
-        </label>
-</fieldset>
+      <fieldset class="comment_form">
+              <legend>{% trans "Comments" %}</legend>
+              <label>
+                      <textarea name="comments" class="extrabig">{{ object.comments }}</textarea>
+              </label>
+      </fieldset>
+      <br />
+      <div id="sidebar" class="sidebar">
+          {% if perms.place.place_write %}
+              <div class="bg_blue">
+                  <input type="hidden" name="room" value="{{ object.id }}" />
+                  {% include "tags/save.html" %}
+              </div>
 
+              {% if object.id %}
+                  {% include "tags/room_sidebar.html" %}
+              {% endif %}
 
-        <br />
+          {% endif %}
+      </div>
 </div>
-    <div id="sidebar" class="sidebar">
-        {% if perms.place.place_write %}
-            <div class="bg_blue">
-                <input type="hidden" name="room" value="{{ object.id }}" />
-                {% include "tags/save.html" %}
-            </div>
-
-            {% if object.id %}
-                {% include "tags/room_sidebar.html" %}
-            {% endif %}
-
-        {% endif %}
-    </div>
-
 </form>
 {% endblock %}

@@ -30,7 +30,7 @@ GNU General Public License for more details.
 
 {% if object.id %}
 	<h2 class="title_clients title">{{ object.person.name }}</h2>
-	<p class="description">{% trans "Referral Details" %}<br />	
+	<p class="description">{% trans "Referral Details" %}<br />
 {% else %}
 	<h2 class="title_clients title">{% trans "New Admission" %}</h2>
 	<p class="description">{% trans "Inform the referral details then click on Save button" %}</p>
@@ -106,22 +106,22 @@ GNU General Public License for more details.
        </fieldset>
       </div>
       <!-- indication -->
-    
+
     <fieldset>
     <legend>{% trans "Subscritpion Details" %}</legend>
             <label class="referral_type_referral hidden">{% trans "Last Referral" %}
                 <select name="referral" class="extrabig asm referral_list" {% if object.id %} id="id_referral" {% endif %} >
                     <option value="">---------</option>
                     {% for r in referral_list %}
-                        <option value="{{ p.id }}"> {{ r }} 
+                        <option value="{{ p.id }}"> {{ r }}
                             {{ r.professional.all|join:", " }}
                         </option>
                     {% endfor %}
                 </select>
             </label>
-            
+
             <input type="hidden" name="message_referral_changing" value="{% trans "This operation will change ALL schedule occurrences. Do you really want to continue?" %}" />
-            
+
             <label>{% trans "To Service" %}<br />
                 <select id="id_service" class="extrabig asm{% if referral.id %} check_change{% endif %}" name="service" original_state="{{ referral.service.id }}">
                     <option value="">---------</option>
@@ -130,18 +130,18 @@ GNU General Public License for more details.
                     {% endfor %}
                 </select>
             </label>
-            
+
             <label class="referral_group {% if referral.id %} check_change {% endif %} " {% if not referral.service.is_group %} style="display:none;" {% endif %}>{% trans "Subscribe this customer in a group" %} <br /> {{ referral_form.group }}
             </label>
     </fieldset>
-            
+
     <!-- profissional combobox -->
     <label style="margin-right:215px;">{% trans "Professionals available" %}</label>
     <label>{% trans "Professionals selected" %}</label>
 
     <div style="clear:both; margin-left:10px;" class="referral_form_professional{% if referral.id %} check_change{% endif %}{% if not referral.id %} hide_on_first{% endif %}">
         {{ referral_form.professional }}
-    </div> 
+    </div>
 
     {% if referral_form.instance %}
         <script>
@@ -161,7 +161,7 @@ GNU General Public License for more details.
         </label>
         <label>{% trans "Impact" %}<br />
         {{ referral_form.impact }}
-        </label>        
+        </label>
         <label>{% trans "Available Time" %}<br />
         {{ referral_form.available_time }}
         </label>
@@ -169,27 +169,26 @@ GNU General Public License for more details.
         {{ referral_form.annotation }}
         </label>
     </fieldset>
-    
-<br />
-    
-</div>
 
-<div id="sidebar" class="sidebar">
+<br />
+
+  <div id="sidebar" class="sidebar">
     {% if perms.referral.referral_write %}
-        <div class="bg_blue">
-            {% include "tags/save.html" %}
-        </div>
+    <div class="bg_blue">
+      {% include "tags/save.html" %}
+    </div>
     {% endif %}
     {% if object.id %}
-        <br />
-        {% include "tags/client_sidebar.html" %}
+    <br />
+    {% include "tags/client_sidebar.html" %}
     {% endif %}
+  </div>
 </div>
+
 <input type="hidden" name="client_id" value="{{ object.id }}" />
 </form>
 
-{% include "tags/address_book_professional_mini.html" %} 
+{% include "tags/address_book_professional_mini.html" %}
 {% include "tags/address_book_organization_mini.html" %}
 
 {% endblock %}
-

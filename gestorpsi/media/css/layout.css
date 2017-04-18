@@ -757,25 +757,17 @@ select.high {
 }
 
 .sidebar {
-        margin-left:750px;
+        margin-left:235px;
+        margin-bottom: 10px;
         width: 240px;
 }
 
-
-.sidebar .bg_blue {
-        background: #005A7D;
-        border: 1px solid black;
-        color: #FFFFFF;
-        padding: 10px;
-
-}
-
 .sidebar .bg_blue p, .sidebar .bg_blue p span {
-        color: #FFF;
+        color: #000;
 }
 .sidebar .bg_blue input {
-        background: #E6E6E6;
-        border: 1px solid #FFFFFF;
+        background: #45ACD4;
+        border: 1px solid #E6E6E6;
         padding: 10px 15px;
         -moz-border-radius-topleft: 8px;
         -moz-border-radius-topright: 8px;
@@ -785,15 +777,15 @@ select.high {
         -webkit-border-radius-topright: 8px;
         -webkit-border-radius-bottomleft: 8px;
         -webkit-border-radius-bottomright: 8px;
-        color: #45ACD4;
+        color: #E6E6E6;
         margin: 10px;
         margin-right: 0;
         font-weight: bold;
         cursor: pointer;
 }
 .sidebar .bg_blue input:hover {
-        background: #45ACD4;
-        color: #E6E6E6;
+        background: #FFFFFF;
+        color: #45ACD4;
         cursor: pointer;
 }
 

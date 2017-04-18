@@ -30,7 +30,7 @@ GNU General Public License for more details.
         {% endif %}
         <li><a href="/employee/deactive/">{% trans "Deactives" %}</a></li>
         {% if object.id %}<li><a class="active">{{ object.person.name }}</a></li>{% endif %}
-        
+
     </ul>
 {% endblock %}
 
@@ -51,19 +51,19 @@ GNU General Public License for more details.
 <h2 id="title_myoffice" style="display:none"></h2>
 
 
-<form action="/employee/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" id="form_employee" class="form_people collapsable form_employee">	
+<form action="/employee/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" id="form_employee" class="form_people collapsable form_employee">
 <div class="main_area">
 
 	<!-- <a href="" id="help">&nbsp;</a> -->
 	<!-- DataTypes form menu -->
-	
-	
+
+
 	{% include "meta/people_indentification.html" %}
-	
+
 	<!--
 	Employee infos
 	-->
-	
+
 	<fieldset id="fieldset_employee_details">
 		<legend>{% trans "Professional Identification" %}</legend>
 			<label>{% trans "Job" %}<br />
@@ -87,14 +87,13 @@ GNU General Public License for more details.
 </fieldset>
 
 
-<br />	
+<br />
+{% include "tags/employee_sidebar.html" %}
 </div>
 
-{% include "tags/employee_sidebar.html" %}
 
 </form>
 
 {% include "tags/upload.html" %}
 
 {% endblock %}
-

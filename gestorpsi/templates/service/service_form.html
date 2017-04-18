@@ -30,7 +30,7 @@ GNU General Public License for more details.
         {% endif %}
         {% if object.id %}<li><a class="active">{{ object.name }}</a></li>{% endif %}
         <li><a class="{% if deactive %} active {% endif %}" href="/service/deactive/">{% trans "all Deactive" %}</a></li>
-        
+
     </ul>
 {% endblock %}
 
@@ -39,29 +39,29 @@ GNU General Public License for more details.
 
 {% if object.id %}
 	<h2 class="title_services title">{{ object.name_html_inline|safe }}</h2>
-	<p class="description">{{ object.description }}<br />	
+	<p class="description">{{ object.description }}<br />
 {% else %}
 	<h2 class="title_services title">{% trans "Adding New Service" %}</h2>
 	<p class="description">{% trans "Inform the service details then click on Save button" %}</p>
 {% endif %}
 </p>
-		
-<form action="/service/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" id="form_service" class="form_service">	
+
+<form action="/service/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" id="form_service" class="form_service">
 <div class="main_area">
 
 	<!-- <a href="" id="help">&nbsp;</a> -->
 
 	<!--
-	Service Identification 
+	Service Identification
 	-->
-	
+
 	<fieldset>
 		<legend>{% trans "Service Identification" %}</legend>
 			<label>{% trans "Service Name" %}<br />
 			<input type="text" maxlength="80"  name="service_name" class="giant tabtitle" value="{{ object.name }}" />
 			</label>
 			<label>{% trans "Service Description" %}<br />
-				<textarea name="service_description" maxlength="999" class="giant object_description">{{ object.description }}</textarea>				
+				<textarea name="service_description" maxlength="999" class="giant object_description">{{ object.description }}</textarea>
 			</label>
 			<label>{% trans "Keywords (separated by ;)" %}<br />
 			<input type="text" maxlength="100" name="service_keywords" class="giant" value="{{ object.keywords }}" />
@@ -75,17 +75,17 @@ GNU General Public License for more details.
 		<legend>{% trans "Academic Related" %}</legend>
             <label>
                 <input type="checkbox" name="academic_related" {% if object.academic_related %} checked{% endif %} />&nbsp;
-                {% trans "This service is academic (supervised) related." %} 
+                {% trans "This service is academic (supervised) related." %}
             </label>
 	</fieldset>
     <fieldset>
 		<legend>{% trans "Research Project" %}</legend>
             <label>
                 <input class="research_project_name" type="checkbox" {% if object.id %}disabled="disabled"{% endif %} name="research_project"{% if object.research_project %} checked{% endif %} />&nbsp;
-                {% trans "This service is linked with a research project" %} 
+                {% trans "This service is linked with a research project" %}
             </label>
                 <div class="research_project_name" {% if object.research_project_name %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-                    <label> 
+                    <label>
                         {% trans "Name" %}
 			            <input type="text" maxlength="100" name="research_project_name" {% if object.id %}disabled="disabled"{% endif %} class="giant" value="{% if object.research_project_name %}{{ object.research_project_name }}{% endif %}" />
                     </label>
@@ -96,7 +96,7 @@ GNU General Public License for more details.
 		<legend>{% trans "Service Group Support" %}</legend>
             <label>
                 <input type="checkbox" name="is_group" {% if object.is_group %} checked{% endif %} />&nbsp;
-                {% trans "If checked, this service will accept group members." %} 
+                {% trans "If checked, this service will accept group members." %}
             </label>
 	</fieldset>
 
@@ -104,23 +104,23 @@ GNU General Public License for more details.
 		<legend>{% trans "On-line Service" %}</legend>
             <label>
                 <input type="checkbox" name="is_online" {% if object.is_online %} checked{% endif %} />&nbsp;
-                {% trans "If checked, this service will accept on-line chat and messages." %} 
+                {% trans "If checked, this service will accept on-line chat and messages." %}
             </label>
 	</fieldset>
 
 	<!--
-	Service Profile 
+	Service Profile
 	-->
-	
+
 	<fieldset>
     <input type="hidden" name="service_area" value="{{ area.id }}" />
-    
+
 		<legend>{% trans "Service Profile" %}</legend>
         <label>{{area.area_name}} {#[ <a href="/service/add/{% if object.id %}{{ object.id }}/{% endif %}">Change Area</a> ]#}</label><br />
 
 		{{ form_area.as_ul }}
 
-		<div style="clear:both;"></div>	
+		<div style="clear:both;"></div>
 		<li><label>{% trans "Profession" %}</label></li><br />
 		<ul>
 		{% for p in Professions %}
@@ -129,16 +129,16 @@ GNU General Public License for more details.
 		</ul>
     </fieldset>
 
-	
+
 	<!--
 	Services Relations
 	-->
-	
+
 	<fieldset>
 		<legend>{% trans "Professionals" %}</legend>
 
-		
-		<div style="clear:both;"></div>	
+
+		<div style="clear:both;"></div>
 		<li><label>{% trans "Related Professionals" %}</label></li><br />
 		<div class="overflow">
 		<ul>
@@ -150,8 +150,8 @@ GNU General Public License for more details.
 		{% endfor %}
 		</ul>
 		</div>
-		
-		<div style="clear:both;"></div>	
+
+		<div style="clear:both;"></div>
 		<li><label>{% trans "Professionals Responsible" %}</label></li><br />
 		<div class="overflow">
 		<ul>
@@ -160,24 +160,22 @@ GNU General Public License for more details.
 		{% endfor %}
 		</ul>
 		</div>
-	</fieldset>	
-	
+	</fieldset>
+
 	<!--
 	Service must to have a status
 	-->
-	
-<fieldset class="comment_form">
+
+  <fieldset class="comment_form">
         <legend>{% trans "Comments" %}</legend>
         <label>
                 <textarea name="comments" class="extrabig">{{ object.comments }}</textarea>
         </label>
-</fieldset>
+  </fieldset>
 
 
-<br />	
-</div>
-
-<div id="sidebar" class="sidebar">
+  <br />
+  <div id="sidebar" class="sidebar">
     {% if perms.service.service_write %}
     	<div class="bg_blue">
         	<input type="hidden" name="service" value="{{ object.id }}" />
@@ -187,10 +185,8 @@ GNU General Public License for more details.
     {% if object.id %}
         {% include "tags/service_sidebar.html" %}
     {% endif %}
+  </div>
 </div>
-
 </form>
 
 {% endblock %}
-
-

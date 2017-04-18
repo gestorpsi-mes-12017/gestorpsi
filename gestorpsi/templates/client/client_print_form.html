@@ -38,14 +38,14 @@ GNU General Public License for more details.
 
 {% if object.id %}
 	<h2 class="title_clients title">{% trans "Print Record Form" %}</h2>
-	<p class="description">{% trans "Select options below to configure your report view" %}<br />	
+	<p class="description">{% trans "Select options below to configure your report view" %}<br />
 {% endif %}
 
 </p>
 <h2 id="title_contacts" style="display:none"></h2>
 <h2 id="title_myoffice" style="display:none"></h2>
 
-<form action="/client/{% if object.id %}{{ object.id }}/{% endif %}print/" method="post" id="form_client_print" class="form_client_print">	
+<form action="/client/{% if object.id %}{{ object.id }}/{% endif %}print/" method="post" id="form_client_print" class="form_client_print">
 <div class="main_area">
 
 	<!-- <a href="" id="help">&nbsp;</a> -->
@@ -76,7 +76,7 @@ GNU General Public License for more details.
             <small>({% trans "if selected will print client EHR data" %})</small>
         </label>
         {% endif %}
-    
+
         <div style="clear:both"></div>
         <label><b>{% trans "Signed by" %}</b><br /></label>
         <div style="clear:both"></div>
@@ -98,26 +98,26 @@ GNU General Public License for more details.
         </div>
 </fieldset>
 
-<br />	
-</div>
-
-
-<div id="sidebar" class="sidebar">
+<br />
+  <div id="sidebar" class="sidebar">
     {% if perms.client.client_write %}
-        <div class="bg_blue">
-        <input class="save_button" name="save" type="submit" value="{% trans 'Print' %}" />
-        <input class="save_button" name="cancel" id="cancel_button" type="button" value="{% trans 'Back' %}" onclick="javascript:history.go(-1)" />
-        
-        <div id="msg_info">
-            <p>
-            </p>
-        </div>
-        </div>
+    <div class="bg_blue">
+      <input class="save_button" name="save" type="submit" value="{% trans 'Print' %}" />
+      <input class="save_button" name="cancel" id="cancel_button" type="button" value="{% trans 'Back' %}" onclick="javascript:history.go(-1)" />
+
+      <div id="msg_info">
+        <p>
+        </p>
+      </div>
+    </div>
     {% endif %}
     {% if object.id %}
-        {% include "tags/client_sidebar.html" %}
+    {% include "tags/client_sidebar.html" %}
     {% endif %}
+  </div>
 </div>
+
+
 
 
 

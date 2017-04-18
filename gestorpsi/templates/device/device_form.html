@@ -29,7 +29,7 @@ GNU General Public License for more details.
         <li><a href="/device/type/">{% trans "types" %}</a></li>
         {% if object.id %}<li><a class="active">{{ object.model }}</a></li>{% endif %}
         <li><a class="{% if deactive %} active {% endif %}" href="/device/deactive/">{% trans "all Deactives" %}</a></li>
-        
+
     </ul>
 {% endblock %}
 
@@ -45,7 +45,7 @@ GNU General Public License for more details.
 {% endif %}
 
 
-<form action="/device/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" class="form_device {% if object.id %} edit_device {%else%} new_device_form {% endif %}" id="form_device">	
+<form action="/device/{% if object.id %}{{ object.id }}/{% endif %}save/" method="post" class="form_device {% if object.id %} edit_device {%else%} new_device_form {% endif %}" id="form_device">
 <div class="main_area">
 
 <!-- <a href="" id="help">&nbsp;</a> -->
@@ -53,10 +53,10 @@ GNU General Public License for more details.
 	<div id="device_form">
 
 		<!-- device -->
-	
+
 		<fieldset id="fieldset_device">
 		<legend>{% trans "Devices" %}</legend>
-			
+
 			<label>{% trans "Select Device Type or" %} <a class="form_mini" display="device_mini">{% trans "add a new one" %}</a><br />
 			<select name="select_device" class="select giant asm">
 				{% for l in device_type %}
@@ -64,14 +64,14 @@ GNU General Public License for more details.
 				{% endfor %}
 			</select>
 			</label>
-		</fieldset>	
-	
+		</fieldset>
+
 
 	<!-- identification -->
-	
+
 	<fieldset id="fieldset_device_identification">
 		<legend>{% trans "Adding equipment details" %}</legend>
-		
+
                         <label>{% trans "Model" %}<br />
                         <input type="text" maxlength="80" name="model" class="giant" value="{{ object.model }}" id="model" />
                         </label>
@@ -79,33 +79,33 @@ GNU General Public License for more details.
 			<label>{% trans "Brand" %}<br />
 			<input type="text" maxlength="80" name="brand" class="giant tabtitle" value="{{ object.brand }}" id="brand" />
 			</label>
-			
+
 			<label>{% trans "Part number" %}<br />
 			<input type="text" maxlength="45" name="part_number" class="giant" value="{{ object.part_number }}" id="part_number" />
 			</label>
-			
+
 			<label>{% trans "Comments" %}<br />
 			<textarea name="comments" class="giant" value="{{ object.comments }}" id="comments">{{ object.comments }}</textarea>
 			</label>
-			
-				
+
+
 	</fieldset>
-	
-	
+
+
 	<!--  lendable checkbox -->
-     
+
      <fieldset id="fieldset_lendable_status">
 		<legend>{% trans "Lendable Status" %}</legend>
 			<label>
 			<input type="checkbox" name="lendable" id="id_lendable" {% if object.lendable %} checked{% endif %} /><label>{% trans "Lendable?" %}
 			</label>
 	</fieldset>
-	
-	
-  
-	
-    <!--  durability  --> 
-    
+
+
+
+
+    <!--  durability  -->
+
     <fieldset id="fieldset_durability_type">
 		<legend>{% trans "Durability" %}</legend>
 			<label>{% trans "Type" %}<br />
@@ -113,12 +113,12 @@ GNU General Public License for more details.
 				<option value="1"{% ifequal object.durability '1' %} selected{% endifequal %}>{% trans "Consumable" %}</option>
 				<option value="2"{% ifequal object.durability '2' %} selected{% endifequal %}>{% trans "Durable" %}</option
 			></select>
-			</label>	
+			</label>
 	</fieldset>
-	
-	
-    
-    <!--  use  --> 
+
+
+
+    <!--  use  -->
 
     <fieldset id="fieldset_use_type">
 		<legend>{% trans "Restriction" %}</legend>
@@ -128,7 +128,7 @@ GNU General Public License for more details.
 				<option value="2"{% if object.prof_restriction %} selected{% endif %}>{% trans "Restrict" %}</option>
 			</select>
 		</label>
-		
+
 		<!--  profission  -->
 		<label class="device_restriction" {% if object.prof_restriction %} style="display: block;" {% else %} style="display: none;" {% endif %} >{% trans "Profissional Area" %}<br />
 		    <select name="professional_area" class="extramedium">
@@ -139,8 +139,8 @@ GNU General Public License for more details.
 		</label>
 	</fieldset>
 
-    <!--  mobility --> 
-    
+    <!--  mobility -->
+
     <fieldset id="fieldset_mobility_type">
 		<legend>{% trans "Mobility" %}</legend>
 		<label>{% trans "Type" %}<br />
@@ -169,26 +169,24 @@ GNU General Public License for more details.
 					{% endfor %}
 				{% endfor %}
 			</select>
-		</label>		
+		</label>
 	</fieldset>
     <br>
 	</div>
+  <div id="sidebar" class="sidebar">
+      {% if perms.device.device_write %}
+      	<div class="bg_blue">
+          	<input type="hidden" name="place" value="{{ object.id }}" />
+              {% include "tags/save.html" %}
+          </div>
+
+          {% if object.id %}
+              {% include "tags/device_sidebar.html" %}
+          {% endif %}
+
+      {% endif %}
+  </div>
 </div>
-
-<div id="sidebar" class="sidebar">
-    {% if perms.device.device_write %}
-    	<div class="bg_blue">
-        	<input type="hidden" name="place" value="{{ object.id }}" />
-            {% include "tags/save.html" %}
-        </div>
-
-        {% if object.id %}
-            {% include "tags/device_sidebar.html" %}
-        {% endif %}
-
-    {% endif %}
-</div>
-
 </form>
 
 {% include "tags/device_mini.html" %}

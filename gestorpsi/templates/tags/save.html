@@ -20,7 +20,6 @@
 <input class="save_button" name="cancel" id="cancel_button" type="button" value="{% trans 'Back' %}" onclick="javascript:history.go(-1)" />
 
 <div id="msg_info">
-	<p>
     <span>
 	    {% if not object.revision %}
         {% trans "This register are not saved yet. Click Save to register it." %}
@@ -29,5 +28,4 @@
 		    {{ object.revision.date_created|date:"r"|slice:":-9"}}&nbsp;hs
       {% endif %}
 		</span>
-	</p>
 </div>

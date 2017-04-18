@@ -33,7 +33,7 @@ GNU General Public License for more details.
     <h2 class="title_clients">{% trans "Client Family" %}</h2>
     <p class="description">{% trans "Adding new family member" %}</p>
 
-    <form action="" method="post" id="form_family" class="form_family">	
+    <form action="" method="post" id="form_family" class="form_family">
         <div class="main_area">
 
             {% if not form.instance.id %}
@@ -56,7 +56,7 @@ GNU General Public License for more details.
                 <legend>{% trans "Add new client and set it client as a related family member" %}</legend>
                 <input type="hidden" name="client_id" value="">
                 <label>{% trans "Name" %}<br />{{ form.name }}</label>
-                <label>{% trans "Family Relation Level" %}<br />{{ form.relation_level }}</label>                    
+                <label>{% trans "Family Relation Level" %}<br />{{ form.relation_level }}</label>
                 <label>{% trans "Is Responsible" %}<br />
                     {% if not is_reverse %}
                         {{ form.responsible }}
@@ -68,9 +68,9 @@ GNU General Public License for more details.
                         {% endif %}
                     {% endif %}
                 </label>
-                
+
                 <label{% if not form.instance.id %} style="display:none;"{% endif %}>{% trans "Is Active?" %}<br />{{ form.active }}</label>
-                
+
                 {% if form.instance.id %}
                     <div style="clear:both;"></div>
                     <label>{{ form.comment.label }}<br />{{ form.comment }}</label>
@@ -78,15 +78,15 @@ GNU General Public License for more details.
 
                 <div class="btn_left"><input name="" type="submit" class="btn" value="{% trans "Save" %}" /></div>
             </fieldset>
-            <br />	
+            <br />
+            <div id="sidebar" class="sidebar">
+              {% if object.id %}
+              {% include "tags/client_sidebar.html" %}
+              {% endif %}
+            </div>
         </div><!-- main area -->
 
 
-        <div id="sidebar" class="sidebar">
-            {% if object.id %}
-                {% include "tags/client_sidebar.html" %}
-            {% endif %}
-        </div>
 
     </form>
 

@@ -38,7 +38,7 @@ GNU General Public License for more details.
 
 {% if object.id %}
 	<h2 class="title_clients title">{{ object.person.name }}</h2>
-	<p class="description">{% if total_service %}{% trans "Client subscribed in" %} {{ total_service }} {% trans "services" %}{% else %}{% trans "This client have no subscribed services" %}. <a href="/client/{{ object.id }}/referral/form/">{% trans "Subscribe it now?" %}</a>{% endif %}<br />	
+	<p class="description">{% if total_service %}{% trans "Client subscribed in" %} {{ total_service }} {% trans "services" %}{% else %}{% trans "This client have no subscribed services" %}. <a href="/client/{{ object.id }}/referral/form/">{% trans "Subscribe it now?" %}</a>{% endif %}<br />
 {% else %}
 	<h2 class="title_clients title">{% trans "Adding New Company Client" %}</h2>
 	<p class="description">{% trans "Inform the client details then click on Save button" %}</p>
@@ -48,7 +48,7 @@ GNU General Public License for more details.
 <h2 id="title_contacts" style="display:none"></h2>
 <h2 id="title_myoffice" style="display:none"></h2>
 
-<form action="/client/{% if object.id %}{{ object.id }}/{% endif %}save/company/" method="post" id="form_client" class="form_people collapsable form_client{% if not object.id %} autocomplete{% endif %}">	
+<form action="/client/{% if object.id %}{{ object.id }}/{% endif %}save/company/" method="post" id="form_client" class="form_people collapsable form_client{% if not object.id %} autocomplete{% endif %}">
 <div class="main_area">
 
 	<!-- <a href="" id="help">&nbsp;</a> -->
@@ -75,20 +75,20 @@ GNU General Public License for more details.
 
     </fieldset>
 
-<br />	
-</div>
-
-
-<div id="sidebar" class="sidebar">
+<br />
+  <div id="sidebar" class="sidebar">
     {% if perms.client.client_write %}
-        <div class="bg_blue">
-            {% include "tags/save.html" %}
-        </div>
+    <div class="bg_blue">
+      {% include "tags/save.html" %}
+    </div>
     {% endif %}
     {% if object.id %}
-        {% include "tags/client_sidebar.html" %}
+    {% include "tags/client_sidebar.html" %}
     {% endif %}
+  </div>
 </div>
+
+
 
 
 
