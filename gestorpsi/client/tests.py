@@ -32,27 +32,26 @@ class ClientTests(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         # OBS: Using cl instead of client to evade conflicts with Client class
-        self.client = Cl()
+        self.cl = Cl()
         setup_required_data()
-        self.name_client = 'Cliente 10'
 
     def test_client_index_should_redirect_unlogged_user(self):
-        req = self.client.get(reverse('client-index'))
+        req = self.cl.get(reverse('client-index'))
         self.assertEqual(req.status_code, 302)
 
     def test_client_index_should_work_for_logged_user(self):
         # user creation and login
-        self.client.post(reverse('registration-register'), user_stub())
-        res = self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
-        req = self.client.get(reverse('client-index'))
+        req = self.cl.get(reverse('client-index'))
         self.assertEqual(req.status_code, 200)
 
     def test_client_should_create_with_valid_arguments(self):
-        self.client.post(reverse('registration-register'), user_stub())
-        self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
@@ -60,19 +59,19 @@ class ClientTests(TestCase):
         setup_required_service()
         old_client_count = Client.objects.count()
 
-        self.client.post(reverse('client-form-new'))
-        self.client.post(reverse('client-form-save'), client_stub())
+        self.cl.post(reverse('client-form-new'))
+        self.cl.post(reverse('client-form-save'), client_stub())
 
         new_client = Client.objects.all()[0]
 
-        new_client_response = self.client.get(reverse('client-home', kwargs={'object_id': str(new_client.id)}))
+        new_client_response = self.cl.get(reverse('client-home', kwargs={'object_id': str(new_client.id)}))
 
         self.assertEqual(Client.objects.count(), old_client_count+1)
         self.assertEqual(new_client_response.status_code, 200)
 
     def test_client_should_not_create_with_none_arguments(self):
-        self.client.post(reverse('registration-register'), user_stub())
-        self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
@@ -80,26 +79,26 @@ class ClientTests(TestCase):
         setup_required_service()
         old_client_count = Client.objects.count()
 
-        self.client.post(reverse('client-form-new'))
-        self.client.post(reverse('client-form-save'))
+        self.cl.post(reverse('client-form-new'))
+        self.cl.post(reverse('client-form-save'))
 
         self.assertEqual(Client.objects.count(), old_client_count)
 
     def test_client_should_be_changed(self):
-        self.client.post(reverse('registration-register'), user_stub())
-        res = self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
 
         setup_required_service()
-        self.client.post(reverse('client-form-new'))
-        self.client.post(reverse('client-form-save'), client_stub())
+        self.cl.post(reverse('client-form-new'))
+        self.cl.post(reverse('client-form-save'), client_stub())
 
         old_client_count = Client.objects.count()
 
         new_client = Client.objects.all()[0]
-        new_client_response = self.client.post(reverse('client-form-save', kwargs={'object_id': str(new_client.id)}), change_client_stub())
+        new_client_response = self.cl.post(reverse('client-form-save', kwargs={'object_id': str(new_client.id)}), change_client_stub())
 
 
         change_client = Client.objects.all()[0]
@@ -108,8 +107,8 @@ class ClientTests(TestCase):
         self.assertEqual(Client.objects.count(), old_client_count)
 
     def test_company_should_create_with_valid_arguments(self):
-        self.client.post(reverse('registration-register'), user_stub())
-        self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
@@ -121,14 +120,14 @@ class ClientTests(TestCase):
 
         person = Person.objects.get(name='Pessoa')
 
-        self.client.post(reverse('client-company-save'), {'person': person, 'name': person.name, 'nickname': person.nickname, 'photo': 'foto', 'gender': 2, 'comments': ''})
+        self.cl.post(reverse('client-company-save'), {'person': person, 'name': person.name, 'nickname': person.nickname, 'photo': 'foto', 'gender': 2, 'comments': ''})
         
         self.assertEqual(Company.objects.count(), old_company_count+1)
 
 
     def test_company_should_create_with_none_arguments(self):
-        self.client.post(reverse('registration-register'), user_stub())
-        self.client.login(username=user_stub()["username"], password=user_stub()["password1"])
+        self.cl.post(reverse('registration-register'), user_stub())
+        self.cl.login(username=user_stub()["username"], password=user_stub()["password1"])
         user = User.objects.get(username=user_stub()["username"])
         user.is_superuser = True
         user.save()
@@ -138,7 +137,7 @@ class ClientTests(TestCase):
 
         old_company_count = Company.objects.count()
 
-        self.client.post(reverse('client-company-save'))
+        self.cl.post(reverse('client-company-save'))
         
         self.assertEqual(Company.objects.count(), old_company_count)
 
@@ -160,25 +159,25 @@ class ClientModelTest(TestCase):
 
         self.client
 
-    def testEmployeeReturn(self):
+    def test_employee_return(self):
         self.assertEqual(self.client.person.name, 'Levi Moraes')
 
-    def testIsActiveMethod(self):
+    def test_is_active_method(self):
         self.assertTrue(self.client.is_active())
 
-    def testIsNotActive(self):
+    def test_is_not_active(self):
         pass
 
-    def testListItemTitle(self):
+    def test_list_item_title(self):
         self.assertEqual(self.client.list_item_title(), 'Levi Moraes')
 
-    def testIsActive(self):
+    def test_is_active(self):
         self.assertEqual(self.client.is_active(),True)
 
-    def testListItemTitleAditional(self):
+    def test_list_item_title_aditional(self):
         self.assertEqual(self.client.list_item_title_aditional(),'')
 
-    def testListItemDescription(self):
+    def test_list_item_description(self):
         self.assertEqual(self.client.list_item_description(),'')
 
     def tearDown(self):
