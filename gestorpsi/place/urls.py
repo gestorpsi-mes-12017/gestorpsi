@@ -50,7 +50,7 @@ urlpatterns = patterns('',
     (r'^room/initial/(?P<initial>[a-zA-Z])/page(?P<page>(\d)+)/$', login_check(room_list)), # quick filter
     (r'^room/filter/(?P<filter>\w+)/page(?P<page>(\d)+)/$', login_check(room_list)), # quick search
     (r'^room/filter/(?P<filter>\w+)/$', login_check(room_list), {'no_paging': True}), # quick search
-    
+
     # deactivated rooms
     (r'^room/initial/(?P<initial>[a-zA-Z])/page(?P<page>(\d)+)/deactive/$', login_check(room_list), {'deactive':True} ), # quick filter
     (r'^room/initial/(?P<initial>[a-zA-Z])/deactive/$', login_check(room_list), {'deactive':True} ), # quick filter
