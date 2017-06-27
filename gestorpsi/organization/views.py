@@ -68,9 +68,9 @@ def form(request):
 
     return render_to_response('organization/organization_form.html', {
         'object': object, #Organization.objects.get(pk= user.get_profile().org_active.id),
-        'PhoneTypes': PhoneType.objects.all(), 
-        'AddressTypes': AddressType.objects.all(), 
-        'EmailTypes': EmailType.objects.all(), 
+        'PhoneTypes': PhoneType.objects.all(),
+        'AddressTypes': AddressType.objects.all(),
+        'EmailTypes': EmailType.objects.all(),
         'IMNetworks': IMNetwork.objects.all(),
         'countries': Country.objects.all(),
         'States': State.objects.all(),
@@ -103,13 +103,13 @@ def save(request):
     except:
         object = Organization()
         object.short_name = slugify(request.POST['name'])
-    
+
     if (object.short_name != request.POST['short_name']):
         if (Organization.objects.filter(short_name__iexact = request.POST['short_name']).count()):
             return HttpResponse("false")
         else:
             object.short_name = request.POST['short_name']
-    
+
     #identity
     object.name = request.POST['name']
     object.trade_name = request.POST['trade_name']
@@ -135,7 +135,7 @@ def save(request):
 
     object.comment = request.POST['comment']
     object.save()
-   
+
     professional_responsible_save(request, object, request.POST.getlist('professionalId'), request.POST.getlist('professional_name'), request.POST.getlist('professional_subscription'), request.POST.getlist('professional_organization_subscription'), request.POST.getlist('service_profession'))
 
     phone_save(object, request.POST.getlist('phoneId'), request.POST.getlist('area'), request.POST.getlist('phoneNumber'), request.POST.getlist('ext'), request.POST.getlist('phoneType'))
@@ -151,7 +151,7 @@ def save(request):
 
     messages.success(request, _('Organization details saved successfully'))
     return HttpResponseRedirect('/organization/')
-    
+
 
 '''
     Tiago de Souza Moraes 20/06/2014
@@ -171,7 +171,7 @@ def get_visible( request, value ):
     if ( value == 'on' ):
         return True
     else:
-        return False 
+        return False
 
 
 
@@ -230,23 +230,24 @@ def suspension(request):
     obj = Organization.objects.get(pk=request.user.get_profile().org_active.id) # get org from logged user
 
     if request.POST and request.POST.get('suspension_confirm'):
-
-        r = u"Conta suspensa dia %s\n\n" % datetime.today().strftime("%d %B %Y, %H:%m").decode('utf-8')
-        for x in request.POST.getlist('suspension_reason'):
-            r += u"%s\n\n" % x
-
-        if request.POST.get('other_reason'):
-            r += request.POST.get('other_reason')
-
-        obj.suspension = True
-        obj.suspension_reason = r
-        obj.save()
-
-        messages.success(request, _('Organization details saved successfully') )
-        return HttpResponseRedirect('/organization/suspension/')
-
+        return suspension_confirmed(request,obj)
     else:
         return render_to_response('organization/organization_signature_suspension.html', {
             'obj': obj,
             },
             context_instance=RequestContext(request))
+def suspension_confirmed(request, obj):
+
+    r = u"Conta suspensa dia %s\n\n" % datetime.today().strftime("%d %B %Y, %H:%m").decode('utf-8')
+    for x in request.POST.getlist('suspension_reason'):
+        r += u"%s\n\n" % x
+
+    if request.POST.get('other_reason'):
+        r += request.POST.get('other_reason')
+
+    obj.suspension = True
+    obj.suspension_reason = r
+    obj.save()
+
+    messages.success(request, _('Organization details saved successfully') )
+    return HttpResponseRedirect('/organization/suspension/')
