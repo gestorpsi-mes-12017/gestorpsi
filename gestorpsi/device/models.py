@@ -33,23 +33,40 @@ MOBILITY_TYPE = (('1', _('FIX')), ('2', _('MOBILE')))
 Similarly, devices are also classified by their mobility, thus this variable represents
 the two kinds of mobility type that are used to classify them.
 """
-
-class DeviceDetailsManager(models.Manager):
+class DeviceDetailsManager(object):
+    def deviceFacade(self):
+        deviceDetailsMobile = DeviceDetailsMobile()
+        deviceDetailsMobile.mobile()
+        deviceDetailsFix = DeviceDetailsFix()
+        deviceDetailsFix.fix()
+        deviceDetailsActive = DeviceDetailsActive()
+        deviceDetailsActive.active(organization)
+        deviceDetailsDeactive = DeviceDetailsDeactive()
+        deviceDetailsDeactive.deactive(organization)
+        
+class DeviceDetailsMobile(models.Manager):
     def mobile(self):
-        return super(DeviceDetailsManager, self).get_query_set().filter(mobility__exact='2')
+        isMobile = super(DeviceDetailsManager, self).get_query_set().filter(mobility__exact='2')
+        return isMobile
 
+class DeviceDetailsFix(models.Manager):
     def fix(self):
-        return super(DeviceDetailsManager, self).get_query_set().filter(mobility__exact='1')
+        isFix = super(DeviceDetailsManager, self).get_query_set().filter(mobility__exact='1')
+        return isFix
 
+class DeviceDetailsActive(models.Manager):
     def active(self, organization):
-        return super(DeviceDetailsManager, self).get_query_set().filter(
+        activated = super(DeviceDetailsManager, self).get_query_set().filter(
             active=True,
             device__organization=organization).order_by('model')
+        return activated
 
+class DeviceDetailsDeactive(models.Manager):
     def deactive(self, organization):
-        return super(DeviceDetailsManager, self).get_query_set().filter(
+        deactivated = super(DeviceDetailsManager, self).get_query_set().filter(
             active=False,
             device__organization=organization).order_by('model')
+        return deactivated
 
 class Device(models.Model):
     """
