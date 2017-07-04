@@ -198,6 +198,15 @@ def setup_required_data():
     instant_message = IMNetwork(description='Hangouts')
     instant_message.save()
 
+    issuer = Issuer(description='SSP')
+    issuer.save()
+
+    email_type = EmailType(description='Comercial')
+    email_type.save()
+
+    instant_message = IMNetwork(description='Hangouts')
+    instant_message.save()
+
 def user_stub():
     st = State.objects.all()[0]
     city = City.objects.all()[0]

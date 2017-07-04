@@ -260,7 +260,7 @@ def get_visible(value):
         return False
 
 @permission_required_with_403('place.place_write')
-def place_order(request, object_id=one):
+def place_order(request, object_id = None):
     object = get_object_or_404(Place, pk=object_id, organization=request.user.get_profile().org_active)
 
     if object.active == True:
